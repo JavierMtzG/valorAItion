@@ -1,0 +1,3 @@
+#evitar archivos .csv
+
+data/*.csv
