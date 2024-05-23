@@ -14,9 +14,9 @@ def load_data(filepath):
 #entre el título de la review y el texto (")
 
 def preprocess_data(data):
-    data['polarity'] = data['polarity'] - 1
-    data['title'] = data['title'].apply(clean_text)
-    data['text'] = data['text'].apply(clean_text)
+    data['clean_title'] = data['title'].apply(clean_text)
+    data['clean_text'] = data['text'].apply(clean_text)
+    data['clean_polarity'] = data['polarity'] - 1
     return data
     
 #En esta función, nos limitamos a limpiar los comentarios con la función definida en text_utilities

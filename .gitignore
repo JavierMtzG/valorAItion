@@ -1,3 +1,5 @@
-#evitar archivos .csv
-
+# Ignorar archivos CSV de gran tamaño
 data/*.csv
+
+# Ignorar archivos de modelo grandes
+*.pkl
