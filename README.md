@@ -56,13 +56,13 @@ Para entrenar el modelo, ejecuta:
 
 ### Evaluación del Modelo
 Para evaluar el modelo, ejecuta:
-``python evaluate.py``
+``python3 evaluate.py``
 # Los resultados se guardarán en evaluation_results.csv, confusion_matrix.csv y classification_report.csv.
 
 ### Predicción de Opiniones
 Para predecir la polaridad de una nueva opinión, ejecuta:
 
-``python predict.py``
+``python3 predict.py``
 
 Introduce el título y el texto de la opinión cuando se te solicite.
 
