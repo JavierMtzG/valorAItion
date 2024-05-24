@@ -1,5 +1,16 @@
-# Ignorar archivos CSV de gran tamaño
+# Ignorar archivos CSV de entrenamiento
 data/*.csv
 
-# Ignorar archivos de modelo grandes
-*.pkl
+# Ignorar archivos del modelo entrenado
+trained_model.pkl
+
+# Archivos y carpetas de entorno de Python
+__pycache__/
+*.pyc
+
+# Archivos de configuración de entorno virtual extras
+.env
+.venv
+env/
+venv/
+ENV/

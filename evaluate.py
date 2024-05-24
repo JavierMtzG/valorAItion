@@ -1,16 +1,12 @@
 import pandas as pd
-from sklearn.externals import joblib
+from joblib import load #CAMBIADO from sklearn.externals import joblib
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-from utilities.text_utilities import clean_text
+from src.preprocess import load_data, preprocess_data
 
+
+#carga del modelo
 def load_model(filepath):
     return joblib.load(filepath)
-
-def preprocess_data(data):
-    # Asegurarse de que 'clean_title' y 'clean_text' existan en los datos
-    data['clean_title'] = data['title'].apply(clean_text)
-    data['clean_text'] = data['text'].apply(clean_text)
-    return data
 
 def main():
     # Cargar el modelo entrenado
@@ -28,15 +24,15 @@ def main():
     y_pred = model.predict(X_test)
 
     # Calcular métricas de evaluación
-    accuracy = accuracy_score(y_true, y_pred)
-    conf_matrix = confusion_matrix(y_true, y_pred)
-    class_report = classification_report(y_true, y_pred)
+    accuracy = accuracy_score(y_true, y_pred) #calculamos la precision entre lo predicho y lo real
+    conf_matrix = confusion_matrix(y_true, y_pred) #generamos la matriz de confusion
+    class_report = classification_report(y_true, y_pred) #genera el reporte de clasificacion
 
     # Mostrar los resultados
-    print(f"Accuracy: {accuracy}")
-    print("\nConfusion Matrix:")
+    print(f"Precision: {accuracy}")
+    print("\nMatriz de Confusion: ")
     print(conf_matrix)
-    print("\nClassification Report:")
+    print("\nReporte de Clasificacion: ")
     print(class_report)
 
     # Guardar los resultados en archivos separados

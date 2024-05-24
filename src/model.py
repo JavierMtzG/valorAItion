@@ -3,7 +3,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.externals import joblib
+from joblib import dump #CAMBIADO DE from sklearn.externals import joblib
 
 def build_model():
     model = Pipeline([
@@ -13,4 +13,4 @@ def build_model():
     return model
 
 def save_model(model, filepath):
-    joblib.dump(model, filepath)
+    dump(model, filepath)

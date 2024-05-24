@@ -3,9 +3,9 @@
 #La función a la que aludimos en la definición clean_text, re.sub, es parte del módulo re de python que sirve para trabajar con
 #expresiones regulares, es una abreviatura de substitute, toma 3 argumentos, el primero que es el patron que se verificará en el texto
 #Lo que añadiremos en lugar de las coincidencias que encuentre el patrón, y la cadena de texto donde queremos hacer las sustituciones
+import re
 
-
-import re clean_text(texto):
-    texto = re.sub(r'\W+', ' ', texto)
-    texto = texto.lower()
-    return texto
+def clean_text(text):
+    text = re.sub(r'\W+', ' ', text)
+    text = text.lower()
+    return text

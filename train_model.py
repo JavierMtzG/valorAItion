@@ -1,4 +1,4 @@
-from src.data_preprocess import load_data, preprocess_data
+from src.preprocess import load_data, preprocess_data 
 from src.model import build_model, save_model
 
 def main():
