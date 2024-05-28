@@ -5,7 +5,15 @@
 #Lo que añadiremos en lugar de las coincidencias que encuentre el patrón, y la cadena de texto donde queremos hacer las sustituciones
 import re
 
-def clean_text(text):
-    text = re.sub(r'\W+', ' ', text)
+def clean_text(text, stop_words=None):
+    # Limpiar el texto eliminando caracteres no alfanuméricos y convirtiéndolo a minúsculas
+    text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
     text = text.lower()
+
+    # Eliminar las stop words si se proporcionan para mejorar la calidad del texto y reducir el ruido
+    if stop_words:
+        words = text.split()
+        words = [word for word in words if word not in stop_words]
+        text = ' '.join(words)
+    
     return text
