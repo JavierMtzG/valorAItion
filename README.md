@@ -30,7 +30,7 @@ valorAItion/
 ### Instalación
 **Clonar el repositorio**:
 ```bash
-git clone https://github.com/tuusuario/valorAItion.git
+git clone https://github.com/JavierMtzG/valorAItion.git
 cd valorAItion
 ```
 **Crear un entorno virtual**:
