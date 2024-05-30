@@ -3,7 +3,10 @@ from utilities.text_utilities import clean_text
 from src.preprocess import load_stop_words
 
 def load_model(filepath):
-    return joblib.load(filepath)
+    print(f"Loading model from {filepath}...")
+    model = joblib.load(filepath)
+    print("Model loaded successfully.")
+    return model
 
 def main():
     stop_words = load_stop_words('./utilities/stop_words_english.txt')

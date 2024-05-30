@@ -1,16 +1,18 @@
-#Se importan las clases para la crear un vectorizador TF-IDF, el clasificador basado en bosques aleatorios, un pipeline y la carga y descarga del modelo.
-#SOLUCION 1 ANTE ERROR 1 noted en tfg, utilizar pipeline, como esperamos vectores en vez de texto crudo en el modelo, debemos usar un vectorizador TF-IDF.
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 
 def build_model():
+    print("Building model...")
     pipeline = Pipeline([
         ('tfidf', TfidfVectorizer()),
-        ('clf', RandomForestClassifier())
+        ('clf', RandomForestClassifier(n_estimators=50, n_jobs=-1))  # Reduce the number of trees for faster training
     ])
+    print("Model built successfully.")
     return pipeline
 
 def save_model(model, filepath):
+    print(f"Saving model to {filepath}...")
     joblib.dump(model, filepath)
+    print("Model saved successfully.")
