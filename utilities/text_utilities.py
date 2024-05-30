@@ -15,11 +15,7 @@ def load_stop_words(filepath):
 
 def clean_text(text, stop_words=None):
     text = str(text)
-    
-    # Remover comillas dobles internas y escapar nuevas líneas
     text = text.replace('""', '"').replace('\\n', '\n')
-    
-    # Limpiar el texto de caracteres no deseados
     text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
     text = text.lower()
     

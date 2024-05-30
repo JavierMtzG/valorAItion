@@ -1,6 +1,5 @@
 import joblib
-from utilities.text_utilities import clean_text
-from src.preprocess import load_stop_words
+from utilities.text_utilities import clean_text, load_stop_words
 
 def load_model(filepath):
     print(f"Loading model from {filepath}...")

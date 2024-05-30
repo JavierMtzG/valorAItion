@@ -21,16 +21,15 @@ def preprocess_data(data, stop_words=None):
     if data is None:
         return None
     
-    print("Preprocessing data...")
-    # Limpiar el título y el texto antes de la combinación
+    print("Cleaning title and text...")
     data['clean_title'] = data['title'].apply(lambda x: clean_text(x, stop_words=stop_words))
     data['clean_text'] = data['text'].apply(lambda x: clean_text(x, stop_words=stop_words))
     
-    # Combinar el título y el texto limpios
+    print("Combining clean title and text...")
     data['combined_text'] = data['clean_title'] + ' ' + data['clean_text']
     
-    # Mapear la polaridad a valores numéricos
+    print("Mapping polarity to numeric values...")
     data['clean_polarity'] = data['polarity'].apply(lambda x: 0 if x == '1' else 1)
     
-    print("Data preprocessed successfully.")
+    print("Preprocessing done.")
     return data
