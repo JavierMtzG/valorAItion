@@ -15,6 +15,7 @@ valorAItion/
 │   └── model.py
 ├── utilities/
 │   └── text_utilities.py
+│   └── stop_words_english.txt
 ├── train_model.py
 ├── predict.py
 ├── evaluate.py
