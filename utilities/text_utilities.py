@@ -4,13 +4,13 @@ from nltk.stem import PorterStemmer
 
 def load_stop_words(filepath):
     try:
-        print(f"Loading stop words from {filepath}...")
+        print(f"Cargando Stop words desde {filepath}...")
         with open(filepath, 'r', encoding='utf-8') as file:
             stop_words = [line.strip() for line in file]
-        print("Stop words loaded successfully.")
+        print("Carga completa de las Stop Words.")
         return stop_words
     except Exception as e:
-        print(f"Error loading stop words from {filepath}: {e}")
+        print(f"Error cargando las Stop Words de {filepath}: {e}")
         return None
 
 def clean_text(text, stop_words=None):

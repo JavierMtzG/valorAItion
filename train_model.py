@@ -4,17 +4,18 @@ from utilities.text_utilities import load_stop_words
 import time
 
 def main():
-    print("Loading stop words...")
+    print("Cargando las Stop Words...")
     stop_words = load_stop_words('./utilities/stop_words_english.txt')
     
-    print("Loading training data...")
+    print("Cargando los datos de entrenamiento...")
     train_data = load_data("./data/train.csv")
-    
-    print("Preprocessing training data...")
+    start_time_preprocess = time.time()
+    print("Preprocesando los datos de entrenamiento...")
     train_data = preprocess_data(train_data, stop_words)
-    
+    print(f"Preprocesamiento completado en {time.time() - start_time_preprocess:.2f} segundos.")
+
     if train_data is None or train_data.empty:
-        print("No data to train on. Exiting...")
+        print("No existen datos para entrenar. Saliendo...")
         return
     
     # Muestreo de datos para pruebas rápidas
@@ -24,15 +25,15 @@ def main():
     X_train = train_data['combined_text']
     y_train = train_data['clean_polarity']
     
-    print("Building the model...")
-    model = build_model(n_estimators=10, max_depth=5, max_features=10, n_jobs=2)  # Limitar a 2 núcleos
+    print("Construyendo el modelo...")
+    model = build_model(n_estimators=300, max_depth=30, max_features=50, n_jobs=6)  # Ajustes aumentados
     
-    print("Training the model...")
+    print("Entrenando el modelo...")
     start_time = time.time()
     model.fit(X_train, y_train)
-    print(f"Model trained successfully in {time.time() - start_time:.2f} seconds.")
+    print(f"Modelo entrenado satisfactoriamente en {time.time() - start_time:.2f} segundos.")
     
-    print("Saving the trained model...")
+    print("Guardando el modelo entrenado...")
     save_model(model, 'trained_model.pkl')
 
 if __name__ == "__main__":

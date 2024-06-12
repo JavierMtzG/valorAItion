@@ -1,0 +1,51 @@
+Cargando Stop Words...
+Cargando Stop words desde ./utilities/stop_words_english.txt...
+Carga completa de las Stop Words.
+Cargando el modelo...
+Loading model from trained_model.pkl...
+Model loaded successfully.
+Cargando los datos de test...
+Cargando datos de ./data/test.csv...
+Datos cargados exitosamente.
+Preprocesando los datos de test...
+Limpiando título y texto...
+Combinando título y texto limpios...
+Mapeando polaridad a valores numéricos...
+Preprocesamiento terminado.
+Datos de test preprocesados en 126.80 segundos.
+Realizando predicciones de los datos de test...
+Predicciones realizadas en 7.31 segundos.
+Precisión (accuracy): 0.81
+
+Matriz de confusión (Confusion Matrix):
+[[153288  46712]
+ [ 27363 172636]]
+
+Reporte de Clasificación(Classification Report):
+              precision    recall  f1-score   support
+
+           0       0.85      0.77      0.81    200000
+           1       0.79      0.86      0.82    199999
+
+    accuracy                           0.81    399999
+   macro avg       0.82      0.81      0.81    399999
+weighted avg       0.82      0.81      0.81    399999
+
+
+Anazizando resultados...
+
+Buena precisión: 0.81. El modelo está funcionando excelente.
+
+Análisis de la matriz de confusión (Confusion Matrix):
+[[153288  46712]
+ [ 27363 172636]]
+Verdaderos Negativos (True Negatives): 153288
+Falsos Positivos (False Positives): 46712
+Falsos Negativos (False Negatives): 27363
+Verdaderos Positivos (True Positives): 172636
+
+Reporte de Clasificación (Classification Report):
+{'0': {'precision': 0.8485311456897554, 'recall': 0.76644, 'f1-score': 0.8053991714194892, 'support': 200000.0}, '1': {'precision': 0.787041596002699, 'recall': 0.8631843159215796, 'f1-score': 0.8233563135064755, 'support': 199999.0}, 'accuracy': 0.8148120370300925, 'macro avg': {'precision': 0.8177863708462272, 'recall': 0.8148121579607899, 'f1-score': 0.8143777424629823, 'support': 399999.0}, 'weighted avg': {'precision': 0.8177864477083564, 'recall': 0.8148120370300925, 'f1-score': 0.8143777200164987, 'support': 399999.0}}
+
+Negative class - Precision: 0.85, Recall: 0.77
+Positive class - Precision: 0.79, Recall: 0.86

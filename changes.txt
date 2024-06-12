@@ -1,0 +1,79 @@
+Para mejorar aún más el rendimiento del modelo, podemos seguir ajustando algunos parámetros. Aquí hay una estrategia para aumentar el rendimiento:
+
+Incrementar aún más el número de estimadores: Más árboles en el bosque aleatorio.
+Ajustar la profundidad máxima del árbol: Permitir árboles más profundos.
+Aumentar el número de características del TF-IDF: Incluir más palabras en la vectorización.
+Vamos a aplicar estos cambios:
+
+train_model.py
+python
+Copiar código
+from src.preprocess import load_data, preprocess_data
+from src.model import build_model, save_model
+from utilities.text_utilities import load_stop_words
+import time
+
+def main():
+    print("Loading stop words...")
+    stop_words = load_stop_words('./utilities/stop_words_english.txt')
+    
+    print("Loading training data...")
+    train_data = load_data("./data/train.csv")
+    
+    print("Preprocessing training data...")
+    train_data = preprocess_data(train_data, stop_words)
+    
+    if train_data is None or train_data.empty:
+        print("No data to train on. Exiting...")
+        return
+    
+    # Muestreo de datos para pruebas rápidas
+    sample_size = 15000  # Aumentamos aún más el tamaño de la muestra
+    train_data = train_data.sample(n=sample_size, random_state=42)
+    
+    X_train = train_data['combined_text']
+    y_train = train_data['clean_polarity']
+    
+    print("Building the model...")
+    model = build_model(n_estimators=100, max_depth=15, max_features='sqrt', n_jobs=4)  # Ajustar parámetros
+    
+    print("Training the model...")
+    start_time = time.time()
+    model.fit(X_train, y_train)
+    print(f"Model trained successfully in {time.time() - start_time:.2f} seconds.")
+    
+    print("Saving the trained model...")
+    save_model(model, 'trained_model.pkl')
+
+if __name__ == "__main__":
+    main()
+model.py
+python
+Copiar código
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
+import joblib
+
+def build_model(n_estimators=100, max_depth=15, max_features='sqrt', n_jobs=4):
+    print("Building model with the following parameters:")
+    print(f"n_estimators={n_estimators}, max_depth={max_depth}, max_features={max_features}, n_jobs={n_jobs}")
+    
+    pipeline = Pipeline([
+        ('tfidf', TfidfVectorizer(max_features=7000)),  # Aumentar el número de características de TF-IDF
+        ('clf', RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, max_features=max_features, n_jobs=n_jobs, class_weight='balanced'))
+    ])
+    print("Model built successfully.")
+    return pipeline
+
+def save_model(model, filepath):
+    print(f"Saving model to {filepath}...")
+    joblib.dump(model, filepath)
+    print("Model saved successfully.")
+Consideraciones Finales
+Incrementar el número de estimadores: Pasamos de 50 a 100.
+Ajustar la profundidad máxima del árbol: Incrementamos la profundidad de 10 a 15.
+Aumentar el número de características del TF-IDF: Incrementamos el número de características de 5000 a 7000.
+Estos ajustes deberían ayudar a mejorar el rendimiento del modelo. Con el incremento en el tamaño de la muestra y los parámetros del modelo, deberías observar una mejora en la precisión y recall sin consumir toda la CPU, pero el tiempo de entrenamiento será un poco mayor.
+
+Prueba estas modificaciones y observa los resultados. Si es necesario ajustar más, podemos seguir refinando los parámetros.
