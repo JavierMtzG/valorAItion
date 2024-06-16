@@ -1,6 +1,5 @@
 from sklearn.pipeline import Pipeline
-from 
-import TfidfVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 
