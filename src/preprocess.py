@@ -8,7 +8,7 @@ def load_data(filepath):
         data = []
         with open(filepath, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
-            next(reader)  # Saltar la primera fila (encabezados)
+            #next(reader)  # Descomentar si en la primera fila aparecen encabezados
             for row in reader:
                 data.append(row)
         print("Datos cargados exitosamente.")
