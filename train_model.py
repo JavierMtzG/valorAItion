@@ -19,7 +19,7 @@ def main():
         return
     
     # Muestreo de datos para pruebas rápidas
-    sample_size = 1800000  # Reducido para pruebas rápidas
+    sample_size = 3600000  # Reducido para pruebas rápidas
     train_data = train_data.sample(n=sample_size, random_state=42)
     
     X_train = train_data['combined_text']
