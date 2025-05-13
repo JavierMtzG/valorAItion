@@ -1,6 +1,7 @@
 from src.preprocess import load_data, preprocess_data
 from src.model import build_model, save_model
 from utilities.text_utilities import load_stop_words
+from sklearn.model_selection import GridSearchCV, train_test_split
 import time
 
 def main():
@@ -25,16 +26,27 @@ def main():
     X_train = train_data['combined_text']
     y_train = train_data['clean_polarity']
     
-    print("Construyendo el modelo...")
-    model = build_model(n_estimators=300, max_depth=30, max_features=50, n_jobs=6)  # Ajustes aumentados
+    print("Construyendo el modelo base...")
+    base_model = build_model()
     
+    print("Aplicando Grid Search para optimización de hiperparámetros...")
+    parametros_grid = {
+        'clf__n_estimators': [100, 300],
+        'clf__max_depth': [20, 30],
+        'clf__max_features': [50, 100]
+    }
+    grid_search = GridSearchCV(base_model, parametros_grid, cv=3, scoring='accuracy', n_jobs=4, verbose=2)
+
     print("Entrenando el modelo...")
     start_time = time.time()
-    model.fit(X_train, y_train)
+    grid_search.fit(X_train, y_train)
     print(f"Modelo entrenado satisfactoriamente en {time.time() - start_time:.2f} segundos.")
-    
+    print(f"Mejores parámetros encontrados: {grid_search.best_params_}")
+
+    best_model = grid_search.best_estimator_
+
     print("Guardando el modelo entrenado...")
-    save_model(model, 'trained_model.pkl')
+    save_model(best_model, 'trained_model.pkl')
 
 if __name__ == "__main__":
     main()
